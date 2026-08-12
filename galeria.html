@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Recuerdos 📸</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="inicio body-galeria">
+
+    <!-- CONTENEDOR TIPO "VENTANA DE APLICACIÓN" -->
+    <div class="app-window">
+        <!-- Barra de título de la ventana -->
+        <div class="title-bar">
+            <span class="title-text">galeria_amor.png</span>
+            <div class="title-buttons">
+                <span class="btn-min"></span>
+                <span class="btn-max"></span>
+                <a href="index.html" class="btn-close"></a>
+            </div>
+        </div>
+
+        <!-- Contenido de la galería -->
+        <div class="container galeria-container">
+            <h1>📸 Nuestros Recuerdos 📸</h1>
+
+            <div class="collage-grid">
+                <img src="fotos/IMG_20260119_155633.jpg" alt="Recuerdo" class="foto-collage" data-texto="Amo verme tan enamorado a tu lado, espero te des cuenta de la forma en la que te miro, que yo si me doy cuenta de cómo me ves con esos ojitos preciosos que tienes 💕">
+                <img src="fotos/IMG_20260313_134553.jpg" alt="Recuerdo" class="foto-collage" data-texto="Siempre recordaré el día que te pedí ser tu novio, te veías hermosa ✨">
+                <img src="fotos/IMG_20260328_202601.jpg" alt="Recuerdo" class="foto-collage" data-texto="Amo salir a pasear contigo corazón 🌷">
+                <img src="fotos/IMG_20260401_235709.jpg" alt="Recuerdo" class="foto-collage" data-texto="Gracias por acompañarme siempre en todo ❤️">
+                <img src="fotos/IMG_20260410_123950.jpg" alt="Recuerdo" class="foto-collage" data-texto="Amo tener lugares especiales contigo y solo contigo 🥰">
+                <img src="fotos/IMG_20260412_020049.jpg" alt="Recuerdo" class="foto-collage" data-texto="Siempre mimandote a ti y a nuestra hijita 💫">
+                <img src="fotos/IMG_20260413_003735.jpg" alt="Recuerdo" class="foto-collage" data-texto="Amo verte emocionada con cada detalle que te doy 🌸">
+                <img src="fotos/IMG_20260414_225727.jpg" alt="Recuerdo" class="foto-collage" data-texto="Amo siempre vernos lindos juntos 💖">
+                <img src="fotos/IMG_20260424_190254.jpg" alt="Recuerdo" class="foto-collage" data-texto="Qué fortuna la mía de coincidir contigo 🌟">
+                <img src="fotos/IMG_20260505_190835.jpg" alt="Recuerdo" class="foto-collage" data-texto="Muchas gracias también por ser detallista conmigo, aprecio cada detalle, carta y regalo que me has hecho 🦋">
+                <img src="fotos/IMG_20260601_012016.jpg" alt="Recuerdo" class="foto-collage" data-texto="Amo molestarte JAJAJA, ay es que te ves tan linda, realmente quiero que mis días empiecen viendo tu carita ☀️">
+                <img src="fotos/IMG_20260613_214255~2.jpg" alt="Recuerdo" class="foto-collage" data-texto="Amo poder explorar nuevos lugares, por ahora dentro de la ciudad, pero sé que más adelante estaremos disfrutando de más viajes y paseos 🗺️">
+                <img src="fotos/IMG_20260626_225251.jpg" alt="Recuerdo" class="foto-collage" data-texto="Y cómo olvidar nuestra primera pijamada, por poco y te mudas a mi cuarto amor 💌">
+                <img src="fotos/IMG_20260713_205025.jpg" alt="Recuerdo" class="foto-collage" data-texto="Amo celebrar cada mesiversario, porque tu carita se ilumina de emoción 💕">
+                <img src="fotos/IMG_20260717_225447.jpg" alt="Recuerdo" class="foto-collage" data-texto="Amo bailar contigo, y tomarnos fotos haciendo caras jajaja 🌹">
+                <img src="fotos/IMG_20260723_212941.jpg" alt="Recuerdo" class="foto-collage" data-texto="Amo crear recuerdos juntos, ya tenemos bastantes fotitos 📸">
+                <img src="fotos/IMG-20260123-WA0031.jpg" alt="Recuerdo" class="foto-collage" data-texto="Siempre me has sacado una sonrisa, gracias también por eso corazón 💕">
+                <img src="fotos/IMG-20260614-WA0005.jpg" alt="Recuerdo" class="foto-collage" data-texto="Me encanta que seas tan chi... Tan chistosa mi vida ❤️‍🔥">
+            </div>
+
+
+    <!-- MENSAJE FINAL CENTRADO EN PANTALLA -->
+    <div id="mensaje-final" class="modal-mensaje">
+        <div class="contenido-mensaje-final">
+            <h2 class="texto-agradecimiento">TE AGRADEZCO POR TODO MI AMOR ❤️</h2>
+            <a href="index.html" class="btn" style="margin-top: 20px;">Volver al inicio ❤️</a>
+        </div>
+    </div>
+
+    <!-- VENTANA EMERGENTE PARA VER IMAGEN Y TEXTO -->
+    <div id="modal-imagen" class="modal" onclick="cerrarModal()">
+        <span class="cerrar-modal">&times;</span>
+        <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+            <img class="modal-contenido" id="img-grande">
+            <p id="texto-modal"></p>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        const modal = document.getElementById("modal-imagen");
+        const imgGrande = document.getElementById("img-grande");
+        const textoModal = document.getElementById("texto-modal");
+        const imagenes = document.querySelectorAll(".foto-collage");
+        const mensajeFinal = document.getElementById("mensaje-final");
+        
+        let fotosRestantes = imagenes.length;
+
+        imagenes.forEach(img => {
+            img.addEventListener("click", () => {
+                modal.style.display = "flex";
+                imgGrande.src = img.src;
+                textoModal.textContent = img.getAttribute("data-texto");
+                
+                setTimeout(() => {
+                    modal.classList.add("activo");
+                }, 10);
+
+                // Oculta la foto de la galería al hacer clic
+                img.style.display = "none";
+                
+                // Resta una foto del total pendiente
+                fotosRestantes--;
+            });
+        });
+
+        function cerrarModal() {
+            modal.classList.remove("activo");
+            setTimeout(() => {
+                modal.style.display = "none";
+                
+                // Si ya se abrieron todas las fotos, muestra el mensaje final centrado
+                if (fotosRestantes === 0) {
+                    mensajeFinal.style.display = "flex";
+                }
+            }, 300);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Especial ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="inicio">
+
+    <div class="container">
+
+        <h1>🔐 Área Secreta ❤️</h1>
+
+        <p style="color: #d1477a; margin-bottom: 20px; font-weight: bold;">
+            Introduce nuestra contraseña especial para entrar:
+        </p>
+
+        <form onsubmit="verificarPassword(event)">
+            <input type="password" id="password" placeholder="Escribe la clave..." required style="padding: 12px; border-radius: 12px; border: 2px solid #ff69b4; width: 80%; max-width: 250px; margin-bottom: 15px; outline: none; text-align: center; font-family: 'Courier New', Courier, monospace; background: #fff; color: #d1477a;">
+            <br>
+            <button type="submit" class="btn">
+                Entrar ❤️
+            </button>
+        </form>
+
+    </div>
+
+    <script>
+        function verificarPassword(event) {
+            event.preventDefault();
+            // Limpiamos espacios extra y convertimos a minúsculas
+            const pass = document.getElementById("password").value.trim().toLowerCase();
+            
+            // Convertimos lo que escribió el usuario a Base64
+            const passCodificada = btoa(pass);
+            
+  
+            const clavesValidas = [
+                "MTMwMw==",
+                "YW1lbGllIGdvcmRpdGE="
+            ];
+
+            if (clavesValidas.includes(passCodificada)) {
+                window.location.href = "mensaje.html";
+            } else {
+                alert("Contraseña incorrecta, ¡inténtalo de nuevo! 💕");
+            }
+        }
+    </script>
+
+</body>
+</html>
+// Si ya sé que dejé las contraseñas en el código, no me juzguen
