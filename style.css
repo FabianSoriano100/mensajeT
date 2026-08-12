@@ -123,11 +123,11 @@ button:hover, .btn:hover {
 }
 
 /* Al pasar el mouse, la foto se endereza y pasa al frente */
-.foto-collage:hover {
+/*.foto-collage:hover {
     transform: scale(1.15) rotate(0deg) !important;
     z-index: 99 !important;
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-}
+}*/
 
 /* Inclinaciones y posiciones aleatorias para cada foto */
 .foto-collage:nth-child(1) { transform: translate(-140px, -40px) rotate(-8deg); z-index: 1; }
