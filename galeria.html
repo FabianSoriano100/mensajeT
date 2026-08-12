@@ -58,8 +58,11 @@
     <div id="modal-imagen" class="modal" onclick="cerrarModal()">
         <span class="cerrar-modal">&times;</span>
         <div class="modal-content-wrapper" onclick="event.stopPropagation()">
-            <img class="modal-contenido" id="img-grande">
-            <p id="texto-modal"></p>
+            <!-- Indicador de carga -->
+            <div id="loader" class="spinner"></div>
+            
+            <img class="modal-contenido" id="img-grande" style="display: none;">
+            <p id="texto-modal" style="display: none;"></p>
         </div>
     </div>
 
@@ -68,6 +71,7 @@
         const modal = document.getElementById("modal-imagen");
         const imgGrande = document.getElementById("img-grande");
         const textoModal = document.getElementById("texto-modal");
+        const loader = document.getElementById("loader");
         const imagenes = document.querySelectorAll(".foto-collage");
         const mensajeFinal = document.getElementById("mensaje-final");
         
@@ -76,6 +80,12 @@
         imagenes.forEach(img => {
             img.addEventListener("click", () => {
                 modal.style.display = "flex";
+                
+                // Mostrar loader y ocultar imagen/texto mientras descarga
+                loader.style.display = "block";
+                imgGrande.style.display = "none";
+                textoModal.style.display = "none";
+                
                 imgGrande.src = img.src;
                 textoModal.textContent = img.getAttribute("data-texto");
                 
@@ -83,20 +93,23 @@
                     modal.classList.add("activo");
                 }, 10);
 
-                // Oculta la foto de la galería al hacer clic
                 img.style.display = "none";
-                
-                // Resta una foto del total pendiente
                 fotosRestantes--;
             });
         });
+
+        // Cuando la imagen termine de cargar en el navegador, ocultar loader y mostrar foto
+        imgGrande.onload = () => {
+            loader.style.display = "none";
+            imgGrande.style.display = "block";
+            textoModal.style.display = "block";
+        };
 
         function cerrarModal() {
             modal.classList.remove("activo");
             setTimeout(() => {
                 modal.style.display = "none";
                 
-                // Si ya se abrieron todas las fotos, muestra el mensaje final centrado
                 if (fotosRestantes === 0) {
                     mensajeFinal.style.display = "flex";
                 }
