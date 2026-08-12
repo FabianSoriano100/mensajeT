@@ -67,6 +67,7 @@
     </div>
 
     <!-- SCRIPT -->
+    <!-- SCRIPT -->
     <script>
         const modal = document.getElementById("modal-imagen");
         const imgGrande = document.getElementById("img-grande");
@@ -81,28 +82,34 @@
             img.addEventListener("click", () => {
                 modal.style.display = "flex";
                 
-                // Mostrar loader y ocultar imagen/texto mientras descarga
+                // 1. Mostrar el spinner y ocultar la foto y texto anteriores
                 loader.style.display = "block";
                 imgGrande.style.display = "none";
                 textoModal.style.display = "none";
                 
-                imgGrande.src = img.src;
-                textoModal.textContent = img.getAttribute("data-texto");
-                
                 setTimeout(() => {
                     modal.classList.add("activo");
                 }, 10);
+
+                // 2. Pequeño retraso para asegurar que el navegador pinte el spinner en pantalla
+                setTimeout(() => {
+                    imgGrande.src = img.src;
+                    textoModal.textContent = img.getAttribute("data-texto");
+                }, 50);
 
                 img.style.display = "none";
                 fotosRestantes--;
             });
         });
 
-        // Cuando la imagen termine de cargar en el navegador, ocultar loader y mostrar foto
+        // 3. Cuando la imagen termine de cargar, ocultar el spinner y mostrar la foto
         imgGrande.onload = () => {
-            loader.style.display = "none";
-            imgGrande.style.display = "block";
-            textoModal.style.display = "block";
+            // Añadimos un leve respiro para que el loader se alcance a lucir
+            setTimeout(() => {
+                loader.style.display = "none";
+                imgGrande.style.display = "block";
+                textoModal.style.display = "block";
+            }, 150);
         };
 
         function cerrarModal() {
@@ -116,17 +123,6 @@
             }, 300);
         }
     </script>
-
-    <script>
-    // Precarga invisible de imágenes en segundo plano
-    window.addEventListener("load", () => {
-        const imagenes = document.querySelectorAll(".foto-collage");
-        imagenes.forEach(img => {
-            const tempImg = new Image();
-            tempImg.src = img.src;
-        });
-    });
-</script>
 
 </body>
 </html>
