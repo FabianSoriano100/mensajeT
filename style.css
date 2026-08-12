@@ -478,3 +478,15 @@ button:hover, .btn:hover {
     font-size: 0.95rem !important;
     color: #5c8dc7 !important;
 }
+
+/* Optimización de animaciones para celulares */
+.modal, .modal-content-wrapper, .modal-mensaje {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.modal-contenido {
+    /* Asegura que la imagen no cause tirones al redimensionar */
+    content-visibility: auto;
+}
