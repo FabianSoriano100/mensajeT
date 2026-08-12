@@ -490,3 +490,19 @@ button:hover, .btn:hover {
     /* Asegura que la imagen no cause tirones al redimensionar */
     content-visibility: auto;
 }
+
+/* Estilo del círculo de carga animado */
+.spinner {
+    width: 45px;
+    height: 45px;
+    border: 5px solid rgba(255, 182, 193, 0.3);
+    border-top: 5px solid #ff1493;
+    border-radius: 50%;
+    animation: girar 0.8s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes girar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
