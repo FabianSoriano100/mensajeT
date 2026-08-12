@@ -104,5 +104,16 @@
         }
     </script>
 
+    <script>
+    // Precarga invisible de imágenes en segundo plano
+    window.addEventListener("load", () => {
+        const imagenes = document.querySelectorAll(".foto-collage");
+        imagenes.forEach(img => {
+            const tempImg = new Image();
+            tempImg.src = img.src;
+        });
+    });
+</script>
+
 </body>
 </html>
